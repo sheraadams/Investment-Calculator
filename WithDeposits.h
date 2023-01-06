@@ -5,9 +5,18 @@ using namespace std;
 
 class WithDeposits 
 {
+private:
 
+    const int MONTHS = 12;
+
+    float YearEndInterest;
+
+    float principle;
+
+    float interestEarned;
 public:
 
+    float account_balance, deposit, interest, years;
     void deposits(float account_balance, float deposit,float interest, float years);
 
 };
