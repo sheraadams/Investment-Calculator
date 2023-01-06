@@ -50,7 +50,7 @@ int main()
             }
 
             // throw invlaid input
-            if (5 < command <= 0)
+            if ((command > 2) || ( command <= 0))
             {
                 throw (command);
             }
