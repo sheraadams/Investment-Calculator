@@ -5,7 +5,15 @@
 #pragma once
 using namespace std;
 class Menu {
+private:
 
+    const int MONTHS = 12;
+
+    float YearEndInterest;
+
+    float principle;
+
+    float interestEarned;
 public:
 
     void pMenu();
