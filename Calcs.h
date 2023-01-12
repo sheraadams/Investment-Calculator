@@ -5,20 +5,30 @@
 using namespace std;
 
 class Calcs {
-private: 
+
+private:
+
+    void SetInterest(float interest);
+
+    void SetBalance(float account_balance);
+
+    float GetBalance();
+
+    float GetInterest();
 
     const int MONTHS = 12;
-  
+
     float YearEndInterest;
 
     float principle;
 
     float interestEarned;
-    
+
 public:
+    Calcs(float account_balance, float deposit, float interest, float years);
 
     float account_balance, deposit, interest, years;
-    
+
     void noDeposits(float account_balance, float deposit,float interest, float years);
 
 };

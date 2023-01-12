@@ -14,9 +14,10 @@ private:
     float principle;
 
     float interestEarned;
-public:
 
+public:
     float account_balance, deposit, interest, years;
+
     void deposits(float account_balance, float deposit,float interest, float years);
 
 };

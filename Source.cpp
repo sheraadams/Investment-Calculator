@@ -21,7 +21,7 @@ int main()
 
     // Class objects instanitation
     WithDeposits DepositObject;
-    Calcs calcsObject;
+
     Menu MenuObj;
 
     do {
@@ -50,7 +50,7 @@ int main()
             }
 
             // throw invlaid input
-            if ((command > 2) || ( command <= 0))
+            if ((command > 2) || (command <= 0))
             {
                 throw (command);
             }
@@ -105,6 +105,7 @@ int main()
             else
 
             {
+                Calcs calcsObject(account_balance, deposit, interest, years);
                 // call the function go get and print balance with no deposits added monthly
                 calcsObject.noDeposits(account_balance, deposit, interest, years);
 
