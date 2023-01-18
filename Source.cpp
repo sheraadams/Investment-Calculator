@@ -1,8 +1,7 @@
 #include <iostream>
 #include <iomanip>
-#include "Calcs.h"
-#include "Menu.h"
-#include "WithDeposits.h"
+#include "Account.h"
+#include "Reports.h"
 
 using namespace std;
 
@@ -12,7 +11,7 @@ float OpeningAmount, deposit, interest, years, account_balance;
 int main()
 {
     // some colorful console output "COLOR 0A" is neon green, "COLOR 0D" is neon pink, 0 refers to background black color.
-    system("COLOR 0A"); 
+    system("COLOR 0A");
 
     // Declare variables
     bool validInput;
@@ -20,9 +19,7 @@ int main()
     int command;
 
     // Class objects instanitation
-    WithDeposits DepositObject;
-
-    Menu MenuObj;
+    Reports reports;
 
     do {
 
@@ -62,7 +59,7 @@ int main()
         // switch option to get interest calculation information 
         if (command == 1)
         {
-            MenuObj.pMenu();
+            reports.menu();
 
             // press any key to continue prompt...
             system("PAUSE");
@@ -73,13 +70,13 @@ int main()
 
             cout << "Initial Investment Amount: ";
             cin >> OpeningAmount;
-       
+
             cout << "Monthly Deposit: ";
             cin >> deposit;
-         
+
             cout << "Annual Interest: ";
             cin >> interest;
-          
+
             cout << "Number of years: ";
             cin >> years;
 
@@ -87,30 +84,37 @@ int main()
             system("PAUSE");
 
             // Starting Balance is first deposit
-            account_balance = OpeningAmount;  
+            account_balance = OpeningAmount;
 
             // convert interest to percentage
-            interest = interest / 100; 
+            interest = interest / 100;
 
             //input validation to prevent large very calculations that will unnecessarily take up system resources
             if ((deposit > 100000000000) || (years > 99) || (interest > 9999) || (OpeningAmount > 10000000000))
             {
                 validInput = false;
-            
+
                 cout << "Input error. Now Exiting the program.";
                 return 0;
-
             }
 
             else
 
             {
-                Calcs calcsObject(account_balance, deposit, interest, years);
+                Account Account(account_balance, deposit, interest, years);
+             
+                float checkAccount = Account.getBalance();
+                float checkInterest = Account.getInterest();
+                float checkYears = Account.getYears();
+                float checkDeposit = Account.getDeposit();
+                cout << "\nYou entered: \nOpening Amount: " <<"$" << checkAccount << ", Deposit: " << "$" << checkDeposit << ", Interest: " 
+                    << checkInterest << "%, " << "Years: " << checkYears << endl;
+   
                 // call the function go get and print balance with no deposits added monthly
-                calcsObject.noDeposits(account_balance, deposit, interest, years);
+                reports.noDeposits(account_balance, deposit, interest, years);
 
                 // call the function go get and print balance with deposits added monthly
-                DepositObject.deposits(account_balance, deposit, interest, years);
+                reports.withDeposits(account_balance, deposit, interest, years);
             }
         }
 
@@ -120,13 +124,13 @@ int main()
             cout << "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
             cout << "|||                  Now exiting the program...                  |||\n";
             cout << "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\n";
-           
+            
             activeInput = false;
 
             return 0;
         }
 
-    // continue the menu loop until the user selects 2 to exit the program
+        // continue the menu loop until the user selects 2 to exit the program
     } while (activeInput == true);
 
     return 0;
