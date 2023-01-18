@@ -3,8 +3,6 @@ class Account
 {
 private:
 
-
-
     const int MONTHS = 12;
 
     float YearEndInterest;
