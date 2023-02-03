@@ -1,3 +1,8 @@
+/* Author: Shera Adams */
+/* Southern New Hampshire University */
+/* For CS210 Programming Languages */
+/* January, 2023 */
+
 #include <iostream>
 #include <iomanip>
 #include "Account.h"
@@ -5,22 +10,21 @@
 
 using namespace std;
 
-// declare variables
+/* declare variables */
 float OpeningAmount, deposit, interest, years, account_balance;
 
 int main()
 {
-    // some colorful console output "COLOR 0A" is neon green, "COLOR 0D" is neon pink, 0 refers to background black color.
     system("COLOR 0A");
 
-    // Declare variables
+    /* Declare variables */
     bool validInput;
     bool activeInput = true;
     int command;
 
-    // Class objects instanitation
+    /* Class objects instanitation */
     Reports reports;
-
+   // auto account = std::make_unique<Account>(account_balance, deposit, interest, years);
     do {
 
         cout << "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
@@ -29,7 +33,7 @@ int main()
         cout << "|||                    [2] Exit the Program                      |||\n";
         cout << "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\n";
 
-        //input validation
+        /* input validation */
         try {
             // try user input
             std::cin >> command;
@@ -56,15 +60,15 @@ int main()
         catch (...) {}
 
 
-        // switch option to get interest calculation information 
+        /* switch option to get interest calculation information */
         if (command == 1)
         {
             reports.menu();
 
-            // press any key to continue prompt...
+            // press any key to continue prompt... 
             system("PAUSE");
 
-            //Get input from user
+            // Get input from user 
             cout << "********************************************************************\n";
             cout << "******************************DATA INPUT****************************\n\n";
 
@@ -89,7 +93,7 @@ int main()
             // convert interest to percentage
             interest = interest / 100;
 
-            //input validation to prevent large very calculations that will unnecessarily take up system resources
+            /* input validation to prevent large very calculations that will unnecessarily take up system resources */
             if ((deposit > 100000000000) || (years > 99) || (interest > 9999) || (OpeningAmount > 10000000000))
             {
                 validInput = false;
@@ -97,9 +101,8 @@ int main()
                 cout << "Input error. Now Exiting the program.";
                 return 0;
             }
-
+            /* print reports */
             else
-
             {
                 Account Account(account_balance, deposit, interest, years);
              
@@ -117,7 +120,6 @@ int main()
                 reports.withDeposits(account_balance, deposit, interest, years);
             }
         }
-
         // switch option to end the program
         if (command == 2)
         {
@@ -129,9 +131,9 @@ int main()
 
             return 0;
         }
-
         // continue the menu loop until the user selects 2 to exit the program
     } while (activeInput == true);
+
 
     return 0;
 }
