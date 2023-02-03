@@ -19,8 +19,7 @@ int main()
     bool activeInput = true;
     int command;
 
-    Reports* reports; 
-    reports = new Reports();
+
     /* Class objects instanitation */
 
     do {
@@ -61,7 +60,8 @@ int main()
         /* switch option to get interest calculation information */
         if (command == 1)
         {
-            reports->menu();
+            Reports reports;
+            reports.menu();
 
             // press any key to continue prompt... 
      
@@ -76,7 +76,6 @@ int main()
 
             activeInput = false;
            
-            delete reports;
            
             return 0;
         }

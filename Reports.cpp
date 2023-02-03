@@ -128,13 +128,12 @@ void Reports::menu()
     /* print reports */
     else
     {
-        Account* account;
-        account = new Account(account_balance, deposit, interest, years);
+        Account account(account_balance, deposit, interest, years);
 
-        float checkAccount = account->getBalance();
-        float checkInterest = account->getInterest();
-        float checkYears = account->getYears();
-        float checkDeposit = account->getDeposit();
+        float checkAccount = account.getBalance();
+        float checkInterest = account.getInterest();
+        float checkYears = account.getYears();
+        float checkDeposit = account.getDeposit();
 
         cout << "\nYou entered: \nOpening Amount: " << "$" << checkAccount << ", Deposit: " << "$" << checkDeposit << ", Interest: "
             << checkInterest << "%, " << "Years: " << checkYears << endl;
@@ -145,7 +144,6 @@ void Reports::menu()
         // call the function go get and print balance with deposits added monthly
         withDeposits(account_balance, deposit, interest, years);
 
-        delete account;
     }
 
     return;
