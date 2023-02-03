@@ -6,7 +6,7 @@
 #include "Reports.h"
 #include <iostream>
 #include <iomanip>
-
+#include "Account.h"
 
 using namespace std;
 
@@ -88,6 +88,65 @@ void Reports::menu()
     cout << "Annual Interest:\n";
 
     cout << "Number of years:\n";
+    
+    system("PAUSE");
+
+    // Get input from user 
+    cout << "********************************************************************\n";
+    cout << "******************************DATA INPUT****************************\n\n";
+
+    cout << "Initial Investment Amount: ";
+    cin >> OpeningAmount;
+
+    cout << "Monthly Deposit: ";
+    cin >> deposit;
+
+    cout << "Annual Interest: ";
+    cin >> interest;
+
+    cout << "Number of years: ";
+    cin >> years;
+
+    // press any key to continue prompt...
+    system("PAUSE");
+
+    // Starting Balance is first deposit
+    account_balance = OpeningAmount;
+
+    // convert interest to percentage
+    interest = interest / 100;
+
+    /* input validation to prevent large very calculations that will unnecessarily take up system resources */
+    if ((deposit > 100000000000) || (years > 99) || (interest > 9999) || (OpeningAmount > 10000000000))
+    {
+        validInput = false;
+
+        cout << "Input error. Now Exiting the program.";
+       
+        return;
+    }
+    /* print reports */
+    else
+    {
+        Account* account;
+        account = new Account(account_balance, deposit, interest, years);
+
+        float checkAccount = account->getBalance();
+        float checkInterest = account->getInterest();
+        float checkYears = account->getYears();
+        float checkDeposit = account->getDeposit();
+
+        cout << "\nYou entered: \nOpening Amount: " << "$" << checkAccount << ", Deposit: " << "$" << checkDeposit << ", Interest: "
+            << checkInterest << "%, " << "Years: " << checkYears << endl;
+
+        // call the function go get and print balance with no deposits added monthly
+        noDeposits(account_balance, deposit, interest, years);
+
+        // call the function go get and print balance with deposits added monthly
+        withDeposits(account_balance, deposit, interest, years);
+
+        delete account;
+    }
 
     return;
 }

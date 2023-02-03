@@ -15,7 +15,14 @@ public:
 	void noDeposits(float t_account_balance, float t_deposit, float t_interest, float t_years);
 
 	void withDeposits(float t_account_balance, float t_deposit, float t_interest, float t_years);
+
+	/* declare variables */
+	float OpeningAmount, deposit, interest, years, account_balance;
+
+	bool validInput;
+
 private:
+
 	float m_principle, m_yearEndInterest, m_interestEarned;
 };
 
