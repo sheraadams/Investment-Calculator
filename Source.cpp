@@ -21,10 +21,11 @@ int main()
     bool validInput;
     bool activeInput = true;
     int command;
-
+    Account* account; 
+    Reports* reports; 
+    reports = new Reports();
     /* Class objects instanitation */
-    Reports reports;
-   // auto account = std::make_unique<Account>(account_balance, deposit, interest, years);
+
     do {
 
         cout << "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
@@ -63,7 +64,7 @@ int main()
         /* switch option to get interest calculation information */
         if (command == 1)
         {
-            reports.menu();
+            reports->menu();
 
             // press any key to continue prompt... 
             system("PAUSE");
@@ -104,20 +105,23 @@ int main()
             /* print reports */
             else
             {
-                Account Account(account_balance, deposit, interest, years);
-             
-                float checkAccount = Account.getBalance();
-                float checkInterest = Account.getInterest();
-                float checkYears = Account.getYears();
-                float checkDeposit = Account.getDeposit();
-                cout << "\nYou entered: \nOpening Amount: " <<"$" << checkAccount << ", Deposit: " << "$" << checkDeposit << ", Interest: " 
+                account = new Account(account_balance, deposit, interest, years);
+               
+                float checkAccount = account->getBalance();
+                float checkInterest = account->getInterest();
+                float checkYears = account->getYears();
+                float checkDeposit = account->getDeposit();
+               
+                cout << "\nYou entered: \nOpening Amount: " << "$" << checkAccount << ", Deposit: " << "$" << checkDeposit << ", Interest: "
                     << checkInterest << "%, " << "Years: " << checkYears << endl;
-   
+
                 // call the function go get and print balance with no deposits added monthly
-                reports.noDeposits(account_balance, deposit, interest, years);
+                reports->noDeposits(account_balance, deposit, interest, years);
 
                 // call the function go get and print balance with deposits added monthly
-                reports.withDeposits(account_balance, deposit, interest, years);
+                reports->withDeposits(account_balance, deposit, interest, years);
+
+                delete account;
             }
         }
         // switch option to end the program
@@ -126,9 +130,11 @@ int main()
             cout << "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
             cout << "|||                  Now exiting the program...                  |||\n";
             cout << "||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\n";
-            
-            activeInput = false;
 
+            activeInput = false;
+           
+            delete reports;
+           
             return 0;
         }
         // continue the menu loop until the user selects 2 to exit the program
